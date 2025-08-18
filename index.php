@@ -49,7 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Marathon Tracker</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
     <h2>🏃 Marathon Progress Tracker</h2>
@@ -67,32 +68,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit">Calculate</button>
     </form>
 
-    <div>
-        <?= $result ?>
-    </div>
-
-    <?php if (!empty($history)): ?>
-        <h3>📜 Past Runs</h3>
-        <table border="1" cellpadding="5">
+<?php if (!empty($history)): ?>
+    <h3>📜 Past Runs (including latest)</h3>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Date</th>
+            <th>Covered (km)</th>
+            <th>Elapsed (h)</th>
+            <th>Target (h)</th>
+            <th>Current Speed (km/h)</th>
+            <th>Required Speed (km/h)</th>
+        </tr>
+        <?php foreach ($history as $run): ?>
             <tr>
-                <th>Covered (km)</th>
-                <th>Elapsed (h)</th>
-                <th>Target (h)</th>
-                <th>Current Speed (km/h)</th>
-                <th>Required Speed (km/h)</th>
+                <td><?= $run["date"] ?? "-" ?></td>
+                <td><?= $run["covered"] ?></td>
+                <td><?= $run["elapsed"] ?></td>
+                <td><?= $run["target"] ?></td>
+                <td><?= number_format($run["currentSpeed"], 2) ?></td>
+                <td><?= number_format($run["requiredSpeed"], 2) ?></td>
             </tr>
-            <?php foreach ($history as $run): ?>
-                <tr>
-                    <td><?= $run["covered"] ?></td>
-                    <td><?= $run["elapsed"] ?></td>
-                    <td><?= $run["target"] ?></td>
-                    <td><?= number_format($run["currentSpeed"], 2) ?></td>
-                    <td><?= number_format($run["requiredSpeed"], 2) ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php else: ?>
-        <p>No previous runs yet.</p>
-    <?php endif; ?>
+        <?php endforeach; ?>
+    </table>
+<?php else: ?>
+    <p>No previous runs yet.</p>
+<?php endif; ?>
+
+ 
 </body>
 </html>

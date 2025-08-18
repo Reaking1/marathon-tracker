@@ -42,9 +42,27 @@ function saveToHistory($raceData) {
 function loadHistory() {
     $file = 'history.txt';
     if (!file_exists($file)) return [];
-    $content = file_get_contents($file);
-    if (empty($content)) return [];
-    return json_decode($content, true) ?? [];
+
+    $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $history = [];
+
+    foreach ($lines as $line) {
+        $parts = explode(",", $line);
+
+        // Make sure we have enough columns
+        if (count($parts) >= 5) {
+            $history[] = [
+                "covered"       => $parts[0],
+                "elapsed"       => $parts[1],
+                "target"        => $parts[2],
+                "currentSpeed"  => $parts[3],
+                "requiredSpeed" => $parts[4],
+            ];
+        }
+    }
+
+    return $history;
 }
+
 
 ?>
