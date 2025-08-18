@@ -1,0 +1,61 @@
+# Marathon Progress Tracker
+
+This is a simple PHP application that allows runners or coaches to track marathon progress. It calculates current average speed, required speed to finish within a target time, and keeps a history of past runs.
+
+---
+
+## Project Structure
+
+marathon-tracker/
+│-- index.php # Main application file
+│-- functions.php # Contains calculation and history handling functions
+│-- history.php # Standalone page to view past runs
+│-- history.txt # Stores marathon run data (CSV format)
+│-- styles.css # Styles for the application
+
+
+---
+
+## Features
+
+1. Input total distance covered, elapsed time, and target finish time.  
+2. Calculates:
+   - Current average speed (km/h)  
+   - Required speed to finish within target (km/h)  
+3. Stores historical race data in `history.txt`.  
+4. Displays past runs in a table on the main page.  
+5. Basic styling for form, results, and history table.
+
+---
+
+## Installation & Running
+
+1. Make sure you have **XAMPP / PHP** installed.  
+2. Place the `marathon-tracker` folder in your `htdocs` directory:  
+
+C:\xampp\htdocs\marathon-tracker
+3. Start Apache in XAMPP.  
+4. Open your browser and go to:  
+http://localhost/marathon-tracker/index.php
+5. Enter marathon data in the form and click **Calculate**.  
+6. Past runs will be displayed in the table below the form.
+
+---
+
+## Notes
+
+- `history.txt` stores run data in **CSV format**. Do not edit manually unless you know CSV formatting.  
+- CSS is loaded from `styles.css` in the same folder as `index.php`.  
+- `functions.php` contains all calculation logic and file handling functions.  
+- `history.php` can be accessed separately to view runs in a cleaner table format.
+
+---
+
+## Troubleshooting
+
+- **CSS not loading:** Make sure `styles.css` is in the same folder as `index.php` and the `<link>` tag in your HTML is:
+```html
+<link rel="stylesheet" href="styles.css">
+
+Author
+I can also create a **smaller version with instructions for converting `history.txt` to JSON** if you want the table to work more reliably.  
